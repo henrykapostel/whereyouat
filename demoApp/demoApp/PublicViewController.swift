@@ -71,20 +71,10 @@ class PublicViewController: UIViewController {
         let success: Bool = desiredAPIResults["success"] as! Bool!
         if (success) { // will enter the loop only if success evaluates to boolean true
             
-            // first, try to see if result will cast as a dictionary, using the optional type
-            let userTest: NSDictionary? = desiredAPIResults["user"] as! NSDictionary!
+            let userTest: NSDictionary? = desiredAPIResults["user"] as! NSDictionary! // get user informatio
             if userTest != nil {
-                
-                // knowing it will cast as a dictionary, we cast it again as a traversable dictionary (the optional type is not traversable)
                 let user: NSDictionary = desiredAPIResults["user"] as! NSDictionary!
-                //
-                // this is where the front-end magic happens
-                //
-                // commands such as println("user=\(user)") will help see what is going on
-                //
-                // below is the 100% safest way to handle the optional parameters
-                for (key, value) in user{
-                    // this is the absolute safest way to check for a parameter
+                for (key, value) in user{ // get user property from user information
                     if key as! String == "user_display_name" {
                         print(value as! String)
                         str_UserName = value as! String
@@ -105,7 +95,7 @@ class PublicViewController: UIViewController {
         self.navigationController?.navigationBarHidden = true
         loadInterface()
     }
-    func loadInterface() {
+    func loadInterface() { // displaying user information with server data
         //Background View
         self.view_Background.frame.size = CGSize(width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
         self.view_Background.backgroundColor = UIColor.brownColor()

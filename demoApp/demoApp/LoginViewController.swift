@@ -26,45 +26,66 @@ class LoginViewController: UIViewController {
     func loadInterface(){
         //Background
         self.view_Background.frame.size = CGSize(width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
-//        self.view_Background.backgroundColor = UIColor.brownColor()
+        self.view_Background.backgroundColor = UIColor(red: 3/255, green: 141/255, blue: 214/255, alpha: 1.0)
         self.view.addSubview(self.view_Background)
         //UserName
-        self.lbl_userName.frame.size = CGSize(width: 80, height: 40)
-        self.lbl_userName.frame.origin = CGPoint(x: 20, y: 100)
-        self.lbl_userName.text = "Name"
-        self.lbl_userName.backgroundColor = UIColor.darkGrayColor()
+        self.lbl_userName.frame.size = CGSize(width: 150, height: 40)
+        self.lbl_userName.frame.origin = CGPoint(x: 25, y: 100)
+        self.lbl_userName.text = "UserName"
+        self.lbl_userName.textColor = UIColor.whiteColor()
+        self.lbl_userName.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         
         self.view_Background.addSubview(self.lbl_userName)
         
-        self.tx_userName.frame.size = CGSize(width: UIScreen.mainScreen().bounds.width - 50 - lbl_userName.bounds.width, height: 40)
-        self.tx_userName.frame.origin = CGPoint(x: 110, y: 100)
-        self.tx_userName.backgroundColor = UIColor.grayColor()
+        self.tx_userName.frame.size = CGSize(width: UIScreen.mainScreen().bounds.width - 40, height: 40)
+        self.tx_userName.frame.origin = CGPoint(x: 20, y: 140)
+        self.tx_userName.backgroundColor = UIColor.whiteColor()
+        self.tx_userName.layer.cornerRadius = 10.0
+        self.tx_userName.layer.borderWidth = 0.5
+        self.tx_userName.layer.borderColor = UIColor.grayColor().CGColor
         self.tx_userName.autocorrectionType = .No
+        self.tx_userName.textAlignment = .Center
+        self.tx_userName.textColor = UIColor(red: 3/255, green: 141/255, blue: 214/255, alpha: 1.0)
+        self.tx_userName.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        
         self.view_Background.addSubview(self.tx_userName)
         
         //Password
-        self.lbl_userPassword.frame.size = CGSize(width: 80, height: 40)
-        self.lbl_userPassword.frame.origin = CGPoint(x: lbl_userName.frame.origin.x, y: lbl_userName.frame.origin.y + lbl_userName.bounds.height + 30)
-        self.lbl_userPassword.backgroundColor = UIColor.darkGrayColor()
+        self.lbl_userPassword.frame.size = CGSize(width: 150, height: 40)
+        self.lbl_userPassword.frame.origin = CGPoint(x: lbl_userName.frame.origin.x, y: tx_userName.frame.origin.y + tx_userName.bounds.height)
         self.lbl_userPassword.text = "Password"
+        self.lbl_userPassword.textColor = UIColor.whiteColor()
+        self.lbl_userPassword.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        
         self.view_Background.addSubview(self.lbl_userPassword)
         
-        self.tx_userPassword.frame.size = CGSize(width: UIScreen.mainScreen().bounds.width - 50 - lbl_userPassword.bounds.width, height: 40)
-        self.tx_userPassword.frame.origin = CGPoint(x: 110, y: lbl_userPassword.frame.origin.y)
-        self.tx_userPassword.backgroundColor = UIColor.grayColor()
+        self.tx_userPassword.frame.size = CGSize(width: UIScreen.mainScreen().bounds.width - 40, height: 40)
+        self.tx_userPassword.frame.origin = CGPoint(x: 20, y: lbl_userPassword.frame.origin.y + 40)
+        self.tx_userPassword.backgroundColor = UIColor.whiteColor()
+        self.tx_userPassword.layer.cornerRadius = 10.0
+        self.tx_userPassword.layer.borderWidth = 0.5
+        self.tx_userPassword.layer.borderColor = UIColor.grayColor().CGColor
         self.tx_userPassword.autocorrectionType = .No
         self.tx_userPassword.secureTextEntry = true
+        self.tx_userPassword.textAlignment = .Center
+        self.tx_userPassword.textColor = UIColor(red: 3/255, green: 141/255, blue: 214/255, alpha: 1.0)
+        self.tx_userPassword.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        
         self.view_Background.addSubview(self.tx_userPassword)
         
         //Submit button
-        self.btn_Ok.frame.size = CGSize(width: 80, height: 40)
-        self.btn_Ok.frame.origin = CGPoint(x: UIScreen.mainScreen().bounds.width - 130, y: 300)
+        self.btn_Ok.frame.size = CGSize(width: UIScreen.mainScreen().bounds.width - 40, height: 40)
+        self.btn_Ok.frame.origin = CGPoint(x: 20, y: 350)
         self.btn_Ok.setTitle("Ok", forState: .Normal)
         self.btn_Ok.setTitle("Ok", forState: .Highlighted)
-        self.btn_Ok.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
-        self.btn_Ok.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
-        self.btn_Ok.backgroundColor = UIColor.brownColor()
+        self.btn_Ok.setTitleColor(UIColor(red: 3/255, green: 141/255, blue: 214/255, alpha: 1.0), forState: UIControlState.Normal)
+        self.btn_Ok.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        self.btn_Ok.backgroundColor = UIColor.whiteColor()
         self.btn_Ok.addTarget(self, action: "actionButton:", forControlEvents: .TouchUpInside)
+        self.btn_Ok.layer.cornerRadius = 10.0
+        self.btn_Ok.layer.borderWidth = 0.5
+        self.btn_Ok.layer.borderColor = UIColor.grayColor().CGColor
+        self.btn_Ok.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         self.view_Background.addSubview(self.btn_Ok)
         
         //Loading View
@@ -84,23 +105,15 @@ class LoginViewController: UIViewController {
         let params: Dictionary = ["user_username": user_username, "user_password": user_password]
         let WYA: WhereYouAt = WhereYouAt()
         
-        WYA.User.login(params, headers: headers){ (response) -> Void in
+        WYA.User.login(params, headers: headers){ (response) -> Void in // login with username into Whereyouat
             let success = response["success"] as! Bool
             dispatch_async(dispatch_get_main_queue()) {
                 self.indicator_Loading.stopAnimating()
-                if (success){
+                if (success){ // if login success, open public viewcontroller.
                     let userTest: NSDictionary? = response["user"] as! NSDictionary!
                     if userTest != nil {
-                        // knowing it will cast as a dictionary, we cast it again as a traversable dictionary (the optional type is not traversable)
                         let user: NSDictionary = response["user"] as! NSDictionary!
-                        //
-                        // this is where the front-end magic happens
-                        //
-                        // commands such as println("user=\(user)") will help see what is going on
-                        //
-                        // below is the 100% safest way to handle the optional parameters
                         for (key, value) in user {
-                            // this is the absolute safest way to check for a parameter
                             if key as! String == "user_display_name" {
                                 print(value as! String)
                             }
@@ -109,7 +122,7 @@ class LoginViewController: UIViewController {
                          let navigationController = UINavigationController(rootViewController: vc)
                          self.presentViewController(navigationController, animated: false, completion: nil)
                     }
-                } else {
+                } else { // if it fails, display error message
                     let message = WYA.User.Result["message"] as? String
                     if message == nil {
                         let message = WYA.User.Error
